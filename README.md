@@ -5,7 +5,7 @@ A collaboration with a sound artist to make an interactive piece where users can
 
 CONCEPT UI:
 ----------
-![Concept UI](demoUItemplate.png)
+![Concept UI](demoUItext.png)
 
 WORKING PROTOTYPE:
 --------------
