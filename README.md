@@ -2,9 +2,11 @@
 
 This project is very early in the prototyping stage.
 A collaboration with a sound artist to make an interactive piece where users can draw how they feel on a scrolling canvas as a music track plays
+
 CONCEPT UI:
 ----------
-![Concept UI](demoUItemplate.PNG)
+![Concept UI](demoUItemplate.png)
+
 WORKING PROTOTYPE:
 --------------
-![Current Prototype](prototypeUItext.PNG)
+![Current Prototype](prototypeUItext.png)
