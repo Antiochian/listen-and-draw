@@ -6,7 +6,7 @@ This collaborative project is still under development - in particular, the sound
 
 CURRENT WORKING PROTOTYPE:
 --------------
-Drawing + Scrolling functionality [With Sound](https://streamable.com/e3vhb):
+Drawing + Scrolling functionality ([With Sound](https://streamable.com/e3vhb)):
 ![Current Prototype](UItest.gif)
 
 Final Reveal functionality:
