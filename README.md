@@ -1,6 +1,6 @@
 # listen-and-draw
 
-An interactive widget where a user is invited to draw how they feel on a scrolling canvas while an experimental sound art track plays in the background.
+An interactive widget where a user is invited to draw how they feel on a scrolling canvas as they listen to an experimental sound art track playing in the background.
 
 Features video replay functionality.
 
