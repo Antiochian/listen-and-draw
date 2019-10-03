@@ -15,7 +15,6 @@ import pygame
 from mutagen.mp3 import MP3
 import random
 import time
-import os
 import sys
 import math
 # INITIALISE PYGAME #
@@ -25,11 +24,25 @@ pygame.init()
 # CONFIGUREABLE PARAMETERS #
 Displayed in rough order of how often you'll want to change them
 """
-filename = "audio/test.mp3"
+length = "long"
+if length == "short":
+    filename = "audio/ghost.mp3"
+    audioname = "Ghost Duet by Louie Zong"
+elif length == "medium":
+    filename = "audio/HOME.mp3"
+    audioname = "'Resonance' by HOME"
+elif length == "long":
+    filename = "audio/bloodhail.mp3"
+    audioname = "'Bloodhail' by Have A Nice Life"
+else:
+    filename = "audio/arttest.mp3"
+    audioname= "test_track 01"
+
+
 loopnumber = 1 #times audio repeats before program finishes
 scrollwidth = 3000 #total width of final canvas (in pixels)
 FPS = 60 #frames per second (can affect drawing smoothness)
-renderspeed = 2 #renderspeed (2 -> 2x as fast) - WORKS BEST WITH INTEGERS
+renderspeed = None #renderspeed (2 -> 2x as fast) - if left to "None" then automatically generated later on
 trackbarposition = "above" #accepts "under" or "above"
 thickness = 3 #starting thickness of line
 pixelsize = 5
@@ -337,6 +350,8 @@ def main():
     totalframes = TOTALTIME*FPS
     timestep = 1/totalframes #calculate percentage increase per frame (percent goes from 0-1)
     pygame.mixer.music.load(filename) #get ready to stream audio track
+    # RENDERSPEED CALCULATION #
+    renderspeed = int((TOTALTIME*FPS/1600))
     # SET UP SCALING CONSTANTS #
     scalefactor = Nx/max(canvasx,canvasy)
     revealoffset = int((Ny-canvasy*scalefactor)/2)
@@ -424,7 +439,7 @@ def main():
             if not pygame.mouse.get_pressed()[0]: #detect mouseUP
                 (prevmousex,prevmousey) = (None,None)
             #RESTART DETECTION (clicking on frozen endframe or pressing "r")
-            if (pygame.mouse.get_pressed()[0] and revealmode == True) or pygame.key.get_pressed()[114]:
+            if (pygame.key.get_pressed()[114] and revealmode == True):
                 #restart program all over again
                 pygame.mixer.music.stop()
                 playmusic = False
@@ -458,7 +473,7 @@ def main():
                 pygame.draw.rect(window, black, pygame.Rect(0,revealoffset,revealwidth,revealheight),int(15*scalefactor))
                 scaledcanvas = pygame.transform.scale(canvas, (revealwidth, revealheight))
                 #RENDER TEXT
-                rendertitle("Click to restart // Press 'Enter' for replay", 30, "Audio track: "+filename, 20, 40,'dfkaisb',-revealoffset )
+                rendertitle("Press 'R' to restart // Press 'Enter' for replay", 30, "Audio track: "+audioname, 20, 40,'dfkaisb',-revealoffset )
                 # BLIT AND UPDATE SCREEN #
                 window.blit(scaledcanvas,(0,revealoffset))
                 window.blit(mask,(0,0))
@@ -478,7 +493,7 @@ def main():
                 clock.tick(FPS)
                 # DETECT QUIT #
                 for event in pygame.event.get():
-                    if event.type == pygame.QUIT:
+                    if event.type == pygame.QUIT or pygame.key.get_pressed()[27]:
                         pygame.quit()
                         sys.exit()
                 currentframe = frame
