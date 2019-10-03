@@ -10,3 +10,6 @@ CURRENT WORKING PROTOTYPE:
 --------------
 Features sound playback and live replay!
 https://streamable.com/nt7f4
+
+Sample GIF:
+![Sample GIF](UItest.gif)
