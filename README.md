@@ -8,8 +8,5 @@ This is a collaborative project and is still under development - I am designing 
 
 CURRENT WORKING PROTOTYPE:
 --------------
-Drawing + Scrolling functionality ([With Sound](https://streamable.com/e3vhb)):
-![Current Prototype](UItest.gif)
-
-Final Reveal functionality:
-![Current Prototype](REVEALtest.gif)
+Features sound playback and live replay!
+https://streamable.com/nt7f4
