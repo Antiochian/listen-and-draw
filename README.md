@@ -9,6 +9,9 @@ This is a collaborative project and is still under development - I am designing 
 CURRENT WORKING PROTOTYPE:
 --------------
 Features sound playback and live replay!
+
+DEMO VIDEO:
+
 https://streamable.com/nt7f4
 
 Sample GIF:
