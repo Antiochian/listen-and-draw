@@ -165,7 +165,7 @@ def windowmeasurements(Nx,Ny):
 def initialdraw(shuffle_enable=True):
     #color in layers
     window.fill(debugcol)   #fill window with bright pink debug color (should never be visible)
-    canvas.fill(canvascolor)      #blank canvas
+    canvas.fill(canvascolor)
     #draw corner breaks on canvas    
     corneroffset = 5*pixelsize
     for x in [corneroffset, scrollwidth - 3*pixelsize - corneroffset]:
@@ -200,10 +200,11 @@ def borderdraw():
     return
 
 def bordershuffle(maxshuffletime,enabled=True):
+    #creates shuffling animation around canvas border when activated
     if enabled:
         starttime = pygame.time.get_ticks()
         shuffletime = 0
-        while shuffletime < maxshuffletime: #keep shuffling border for 250 milliseconds
+        while shuffletime < maxshuffletime:
             mask.fill(maskcolor)         #fill mask
             pygame.draw.rect(mask, transparent,ActiveRect) #cut out hole in mask
             pygame.draw.rect(mask, black,ActiveRect,pixelsize) #outline mask in dark color
@@ -219,7 +220,7 @@ def bordershuffle(maxshuffletime,enabled=True):
             pygame.display.update() #update whole window
             time.sleep(maxshuffletime/5000)
             shuffletime = pygame.time.get_ticks() - starttime
-    else:
+    else: #else, no animation
         mask.fill(maskcolor)         #fill mask
         pygame.draw.rect(mask, transparent,ActiveRect) #cut out hole in mask
         pygame.draw.rect(mask, black,ActiveRect,pixelsize) #outline mask in dark color
@@ -236,9 +237,12 @@ def bordershuffle(maxshuffletime,enabled=True):
     return
 
 def fadein(finalcolor,fadelength,startcolor = (0,0,0,0)): #fadelength is in milliseconds
+    """
+    Displays "fadein" animation used for menu transitions
+    """
     frames = int(fadelength*FPS/1000)
-    #frametime = 1/FPS defunct variable for time.sleep(frametime) functionality
-    #this is in case one wants to decouple the animation rate from the frame rate
+    #frametime = 1/FPS #defunct variable for time.sleep(frametime) functionality
+    #(this is in case one wants to decouple the animation rate from the frame rate)
     for framenumber in range(frames+1):
         colorfraction = framenumber/10
         Rcolorchange = -startcolor[0] + finalcolor[0]
@@ -294,7 +298,7 @@ def drawsmoothline(mousex,mousey,prevmousex,prevmousey,color,endcolor,thickness)
 
 def rendertitle(topstring,topsize,bottomstring,bottomsize,spacer=40,myfont='dfkaisb',verticaloffset=0):
         #(spacer is the spacing between the title and subtitle)
-        titlefont = pygame.font.SysFont(myfont,topsize) #"True" makes this title bold
+        titlefont = pygame.font.SysFont(myfont,topsize)
         pausefont = pygame.font.SysFont(myfont, bottomsize)
         titletextsurf = titlefont.render(topstring,True,textcolor)
         (titletextwidth, titletextheight) = (max(titletextsurf.get_width(),1),max(titletextsurf.get_height(),1))
@@ -310,7 +314,7 @@ def rendertitle(topstring,topsize,bottomstring,bottomsize,spacer=40,myfont='dfka
     
 def scrollcanvas(scrollspeed, decimaloffsetx,offsetx):
     """
-    This function scrolls the canvas. Its designed to reach the bottom just as
+    This function scrolls the canvas. Its currently designed to reach the bottom just as
     the song ends, plus or minus a frame.
     """
     decimaloffsetx -= scrollspeed
@@ -318,6 +322,9 @@ def scrollcanvas(scrollspeed, decimaloffsetx,offsetx):
     return decimaloffsetx,offsetx
 
 def updatetrackbar(timepercent):
+    """
+    Updates trackbar progress
+    """
     if trackbarposition == "under":
        pygame.draw.rect(mask, black,pygame.Rect(int((Nx-trackbarwidth)/2),int(Ny - trackbarheight-(offsety-trackbarheight)/2),timepercent*trackbarwidth,trackbarheight) ) 
     else: #otherwise display on top
@@ -331,7 +338,7 @@ def updatetrackbar(timepercent):
 ################################################################################################## 
 """
 (canvasx,canvasy,canvaswidth, canvasheight, offsetx, offsety,trackbarwidth,trackbarheight,ActiveRect,trackbar)\
-= windowmeasurements(Nx,Ny) #set some global variables
+= windowmeasurements(Nx,Ny) #set some global variables using helper function
 def main():
     # set up variables again inside function #
     (canvasx,canvasy,canvaswidth, canvasheight, offsetx, offsety,trackbarwidth,trackbarheight,ActiveRect,trackbar)\
@@ -383,6 +390,7 @@ def main():
         - Handles mousedrawing, music playing, canvas scrolling
     
     These different program modes are controlled by various boolean "mode flags"
+    <TODO> Add error messages to check if mode flags conflict (should never happen anyway, but never hurts to be sure)
     """
     pausemode = True
     rendermode = False
